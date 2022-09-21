@@ -1,5 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Text.RegularExpressions;
+﻿using AspNetCore.APIUI.Helpers;
+using AspNetCore.APIUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
@@ -13,51 +13,44 @@ public sealed class TestController : ControllerBase
 	public TestController(IApiDescriptionGroupCollectionProvider provider) => _provider = provider;
 
 	[HttpGet("{someParam:length(1,10)}")]
-	public string Normal(string someParam, [FromQuery] string someQuery) => "Heyhey";
-
-	[HttpGet]
-	public IEnumerable<Endpoint> Endpoints() =>
-		from item in _provider.ApiDescriptionGroups.Items.SelectMany(@group => @group.Items)
-		select new Endpoint
-		{
-			RelativePath = item.RelativePath,
-			HTTPMethod = item.HttpMethod,
-			Parameters = from param in item.ParameterDescriptions
-				select new Endpoint.Parameter
-				{
-					Type = param.Type.FullName,
-					Name = param.Name,
-					IsRequired = param.IsRequired,
-					DefaultValue = param.DefaultValue
-				}
-		};
-}
-
-/// <summary> The model we send to the UI </summary>
-[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global"), SuppressMessage("ReSharper", "MemberCanBeInternal")]
-public readonly struct Endpoint
-{
-	/// <summary> Shown in UI </summary>
-	public string? RelativePath { get; init; }
-
-	/// <summary> Shown in UI </summary>
-	public string? HTTPMethod { get; init; }
-
-	public readonly struct Parameter
+	public string Normal(string someParam, [FromQuery] string someQuery)
 	{
-		/// <summary> Label in UI </summary>
-		public string Name { get; init; }
+		if (someParam == "Fail")
+		{
+			Response.StatusCode = StatusCodes.Status400BadRequest;
+			return "No";
+		}
 
-		/// <summary> Determines JavaScript type </summary>
-		public string? Type { get; init; }
-
-		/// <summary> Determines required fields in UI </summary>
-		public bool IsRequired { get; init; }
-
-		/// <summary> Shown in UI as a placeholder </summary>
-		public object? DefaultValue { get; init; }
+		return "Heyhey";
 	}
 
-	/// <summary> Endpoints in the Web API </summary>
-	public IEnumerable<Parameter> Parameters { get; init; }
+	[HttpGet] public IEnumerable<string> Array() => new[] { "Wee", "woo" };
+
+	[HttpGet]
+	public IActionResult Endpoints() =>
+		Ok(from item in _provider.ApiDescriptionGroups.Items.SelectMany(@group => @group.Items)
+			where item.RelativePath != "V1/Test/Endpoints" && item.HttpMethod == HttpMethods.Get
+			let response = item.SupportedResponseTypes.FirstOrDefault()
+			select new EndpointDefinition
+			{
+				RelativePath = item.RelativePath,
+				HTTPMethod = item.HttpMethod,
+				Parameters = from param in item.ParameterDescriptions
+					select new ParameterDefinition
+					{
+						TypeDefinition = param.Type.ToTypeDefinition(),
+						Name = param.Name,
+						IsRequired = param.IsRequired,
+						DefaultValue = param.DefaultValue,
+						BindingSource = param.Source.Id,
+						LengthConstraints = param.MapLengthDefinitions()
+					},
+				ReturnsDefinition = new ReturnDefinition
+				{
+					TypeDefinition = response?.Type.ToTypeDefinition() ?? new TypeDefinition(),
+					MimeTypes = from format in response?.ApiResponseFormats
+							?? Enumerable.Empty<ApiResponseFormat>()
+						select format.MediaType
+				}
+			});
 }
