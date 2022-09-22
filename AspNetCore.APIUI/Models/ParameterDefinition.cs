@@ -1,5 +1,8 @@
-﻿namespace AspNetCore.APIUI.Models;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace AspNetCore.APIUI.Models;
+
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 internal readonly struct ParameterDefinition
 {
 	/// <summary> Label in UI </summary>
@@ -15,7 +18,7 @@ internal readonly struct ParameterDefinition
 	public object? DefaultValue { get; init; }
 
 	/// <summary> How this parameter is bound </summary>
-	public string? BindingSource { get; init; }
+	public string BindingSource { get; init; }
 
 	/// <summary> Constraints for the parameter </summary>
 	public IEnumerable<LengthDefinition> LengthConstraints { get; init; }

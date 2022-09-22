@@ -1,6 +1,9 @@
-﻿namespace AspNetCore.APIUI.Models;
+﻿using System.Diagnostics.CodeAnalysis;
 
-public readonly struct TypeDefinition
+namespace AspNetCore.APIUI.Models;
+
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
+internal readonly struct TypeDefinition
 {
 	public TypeDefinition()
 	{

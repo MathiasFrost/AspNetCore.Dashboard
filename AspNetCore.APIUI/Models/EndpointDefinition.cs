@@ -3,6 +3,7 @@
 namespace AspNetCore.APIUI.Models;
 
 /// <summary> The model we send to the UI </summary>
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 internal readonly struct EndpointDefinition
 {
 	/// <summary> Shown in UI </summary>

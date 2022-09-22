@@ -1,5 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace AspNetCore.APIUI;
 
+[SuppressMessage("ReSharper", "UnusedMember.Global"), SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global"),
+ SuppressMessage("ReSharper", "MemberCanBeInternal")]
 public sealed class WeatherForecast
 {
 	public DateTime Date { get; set; }
