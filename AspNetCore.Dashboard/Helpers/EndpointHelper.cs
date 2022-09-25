@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using AspNetCore.APIUI.Models;
+using AspNetCore.Dashboard.Models;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Routing.Constraints;
 
-namespace AspNetCore.APIUI.Helpers;
+namespace AspNetCore.Dashboard.Helpers;
 
 internal static class EndpointHelper
 {

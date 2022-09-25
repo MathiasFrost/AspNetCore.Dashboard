@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace AspNetCore.APIUI.Controllers;
+namespace AspNetCore.Dashboard.Controllers;
 
 [ApiController, Route("[controller]")]
 public class WeatherForecastController : ControllerBase

@@ -1,6 +1,8 @@
-﻿# AspNetCore.APIUI - _ASP.NET Core_
+﻿# AspNetCore.Dashboard - _ASP.NET Core_
 
 Simple, clean API Definition UI for ASP.NET Core
+
+Frontend: [AspNetCore.Dashboard.Browser](https://github.com/MathiasFrost/AspNetCore.Dashboard.Browser)
 
 ## Committing
 

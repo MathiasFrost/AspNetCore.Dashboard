@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace AspNetCore.APIUI.Models;
+namespace AspNetCore.Dashboard.Models;
 
 /// <summary> The model we send to the UI </summary>
 [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]

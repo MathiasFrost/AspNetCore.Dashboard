@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.APIUI", "AspNetCore.APIUI\AspNetCore.APIUI.csproj", "{E3EBE11B-9831-44BB-A81C-A4583B250FE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Dashboard", "AspNetCore.Dashboard\AspNetCore.Dashboard.csproj", "{E3EBE11B-9831-44BB-A81C-A4583B250FE7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{AEF1A62B-6F83-49AE-98F5-D86CD066D8EA}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		AspNetCore.APIUI.sln.DotSettings = AspNetCore.APIUI.sln.DotSettings
+		AspNetCore.Dashboard.sln.DotSettings = AspNetCore.Dashboard.sln.DotSettings
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection

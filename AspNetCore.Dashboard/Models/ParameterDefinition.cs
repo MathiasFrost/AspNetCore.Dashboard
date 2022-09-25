@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace AspNetCore.APIUI.Models;
+namespace AspNetCore.Dashboard.Models;
 
 [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 internal readonly struct ParameterDefinition

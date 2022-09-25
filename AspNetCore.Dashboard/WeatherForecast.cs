@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace AspNetCore.APIUI;
+namespace AspNetCore.Dashboard;
 
 [SuppressMessage("ReSharper", "UnusedMember.Global"), SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global"),
  SuppressMessage("ReSharper", "MemberCanBeInternal")]

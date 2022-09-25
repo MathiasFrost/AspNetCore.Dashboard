@@ -1,9 +1,9 @@
-﻿using AspNetCore.APIUI.Helpers;
-using AspNetCore.APIUI.Models;
+﻿using AspNetCore.Dashboard.Helpers;
+using AspNetCore.Dashboard.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-namespace AspNetCore.APIUI.Controllers.V1;
+namespace AspNetCore.Dashboard.Controllers.V1;
 
 [ApiController, Route("V1/[controller]/[action]")]
 public sealed class TestController : ControllerBase
