@@ -43,6 +43,27 @@ internal static class EndpointHelper
 
 		switch (type)
 		{
+			// Base type
+			case { } when typeCode > TypeCode.Object:
+				return new TypeDefinition
+				{
+					TypeCode = typeCode,
+					IsArray = false,
+					IsEnum = false,
+					Properties = Enumerable.Empty<TypeDefinition>(),
+					ValidValues = Enumerable.Empty<object?>()
+				};
+			// Enum
+			case { IsEnum: true }:
+				return new TypeDefinition
+				{
+					TypeCode = typeCode,
+					IsArray = false,
+					IsEnum = true,
+					Properties = Enumerable.Empty<TypeDefinition>(),
+					ValidValues = Enumerable.Empty<object?>()
+				};
+			// Array
 			case { } when type.IsAssignableTo(typeof(IEnumerable)) || type.IsArray:
 			{
 				Type? genericType = type.GenericTypeArguments.FirstOrDefault();
@@ -57,6 +78,7 @@ internal static class EndpointHelper
 					ValidValues = Enumerable.Empty<object?>()
 				};
 			}
+			// Object
 			case { } when typeCode is TypeCode.Object:
 				IEnumerable<Type> props = type.GetProperties().Select(info => info.PropertyType);
 				return new TypeDefinition
@@ -67,24 +89,7 @@ internal static class EndpointHelper
 					Properties = from prop in props select prop.ToTypeDefinition(),
 					ValidValues = Enumerable.Empty<object?>()
 				};
-			case { IsEnum: true }:
-				return new TypeDefinition
-				{
-					TypeCode = typeCode,
-					IsArray = false,
-					IsEnum = true,
-					Properties = Enumerable.Empty<TypeDefinition>(),
-					ValidValues = Enumerable.Empty<object?>()
-				};
-			default:
-				return new TypeDefinition
-				{
-					TypeCode = typeCode,
-					IsArray = type?.IsArray ?? false,
-					IsEnum = type?.IsEnum ?? false,
-					Properties = Enumerable.Empty<TypeDefinition>(),
-					ValidValues = Enumerable.Empty<object?>()
-				};
+			default: return new TypeDefinition { TypeCode = TypeCode.DBNull };
 		}
 	}
 }
