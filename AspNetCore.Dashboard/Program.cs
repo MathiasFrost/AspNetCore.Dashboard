@@ -4,14 +4,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(options => options.AddDefaultPolicy(policyBuilder =>
 {
-	policyBuilder.WithOrigins("http://localhost:4200");
+	policyBuilder.WithOrigins("http://localhost:3000");
 	policyBuilder.AllowAnyMethod();
 	policyBuilder.AllowAnyHeader();
 }));
 
 WebApplication app = builder.Build();
 
-app.UseHttpsRedirection();
+app.UseHttpLogging();
+
 app.UseCors();
 app.UseAuthorization();
 app.MapControllers();
