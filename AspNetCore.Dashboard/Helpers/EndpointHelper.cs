@@ -9,18 +9,15 @@ internal static class EndpointHelper
 {
 	public static IEnumerable<LengthDefinition> MapLengthDefinitions(this ApiParameterDescription description)
 	{
-		IEnumerable<LengthRouteConstraint>? constraints = description.RouteInfo?.Constraints
-			?.OfType<LengthRouteConstraint>();
+		IEnumerable<LengthRouteConstraint>? constraints = description.RouteInfo?.Constraints?.OfType<LengthRouteConstraint>();
 
 		constraints ??= Enumerable.Empty<LengthRouteConstraint>();
-		return from constraint in constraints
-			select new LengthDefinition { MaxLength = constraint.MaxLength, MinLength = constraint.MinLength };
+		return from constraint in constraints select new LengthDefinition { MaxLength = constraint.MaxLength, MinLength = constraint.MinLength };
 	}
 
 	public static TypeDefinition ToTypeDefinition(this Type? type)
 	{
-		TypeCode typeCode = type switch
-		{
+		TypeCode typeCode = type switch {
 			null => TypeCode.Empty,
 			_ when type.IsAssignableTo(typeof(sbyte)) => TypeCode.SByte,
 			_ when type.IsAssignableTo(typeof(byte)) => TypeCode.Byte,
@@ -45,8 +42,7 @@ internal static class EndpointHelper
 		{
 			// Base type
 			case { } when typeCode > TypeCode.Object:
-				return new TypeDefinition
-				{
+				return new TypeDefinition {
 					TypeCode = typeCode,
 					IsArray = false,
 					IsEnum = false,
@@ -55,8 +51,7 @@ internal static class EndpointHelper
 				};
 			// Enum
 			case { IsEnum: true }:
-				return new TypeDefinition
-				{
+				return new TypeDefinition {
 					TypeCode = typeCode,
 					IsArray = false,
 					IsEnum = true,
@@ -67,22 +62,18 @@ internal static class EndpointHelper
 			case { } when type.IsAssignableTo(typeof(IEnumerable)) || type.IsArray:
 			{
 				Type? genericType = type.GenericTypeArguments.FirstOrDefault();
-				return new TypeDefinition
-				{
+				return new TypeDefinition {
 					TypeCode = typeCode,
 					IsArray = true,
 					IsEnum = false,
-					Properties = genericType == null
-						? Enumerable.Empty<TypeDefinition>()
-						: new[] { genericType.ToTypeDefinition() },
+					Properties = genericType == null ? Enumerable.Empty<TypeDefinition>() : new[] { genericType.ToTypeDefinition() },
 					ValidValues = Enumerable.Empty<object?>()
 				};
 			}
 			// Object
 			case { } when typeCode is TypeCode.Object:
-				IEnumerable<Type> props = type.GetProperties().Select(info => info.PropertyType);
-				return new TypeDefinition
-				{
+				IEnumerable<Type> props = type.GetProperties().Select(static info => info.PropertyType);
+				return new TypeDefinition {
 					TypeCode = typeCode,
 					IsArray = false,
 					IsEnum = true,

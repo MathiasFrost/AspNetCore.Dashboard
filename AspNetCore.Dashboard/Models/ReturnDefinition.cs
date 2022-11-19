@@ -1,9 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using JetBrains.Annotations;
 
 namespace AspNetCore.Dashboard.Models;
 
-[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-internal readonly struct ReturnDefinition
+[PublicAPI]
+public readonly struct ReturnDefinition
 {
 	/// <summary> Determines JavaScript type </summary>
 	public TypeDefinition TypeDefinition { get; init; }

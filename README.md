@@ -1,6 +1,6 @@
 ﻿# AspNetCore.Dashboard - _ASP.NET Core_
 
-Simple, clean API Definition UI for ASP.NET Core
+Simple, clean OpenAPI Dashboard for ASP.NET Core
 
 Frontend: [AspNetCore.Dashboard.Browser](https://github.com/MathiasFrost/AspNetCore.Dashboard.Browser)
 

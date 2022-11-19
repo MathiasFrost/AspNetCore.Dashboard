@@ -3,7 +3,7 @@
 namespace AspNetCore.Dashboard.Models;
 
 [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-internal readonly struct TypeDefinition
+public readonly struct TypeDefinition
 {
 	public TypeDefinition()
 	{

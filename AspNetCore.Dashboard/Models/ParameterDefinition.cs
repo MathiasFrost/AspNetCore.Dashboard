@@ -1,9 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using JetBrains.Annotations;
 
 namespace AspNetCore.Dashboard.Models;
 
-[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-internal readonly struct ParameterDefinition
+[PublicAPI]
+public readonly struct ParameterDefinition
 {
 	/// <summary> Label in UI </summary>
 	public string Name { get; init; }

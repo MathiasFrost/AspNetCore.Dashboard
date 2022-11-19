@@ -1,9 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using JetBrains.Annotations;
 
 namespace AspNetCore.Dashboard.Models;
 
-[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-internal readonly struct LengthDefinition
+[PublicAPI]
+public readonly struct LengthDefinition
 {
 	public int MaxLength { get; init; }
 

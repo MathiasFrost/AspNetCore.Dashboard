@@ -1,10 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using JetBrains.Annotations;
 
 namespace AspNetCore.Dashboard.Models;
 
 /// <summary> The model we send to the UI </summary>
-[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-internal readonly struct EndpointDefinition
+[PublicAPI]
+public readonly struct EndpointDefinition
 {
 	/// <summary> Shown in UI </summary>
 	public string? RelativePath { get; init; }
